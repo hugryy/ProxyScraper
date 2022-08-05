@@ -18,3 +18,7 @@ Scraped ~90k+ proxies and checked them with [unfx proxy checker](https://github.
 ![image](https://user-images.githubusercontent.com/65458800/182977344-0154b568-80c0-427f-9a9c-abe7295d5c51.png)
 # Screenshot
 ![image](https://user-images.githubusercontent.com/65458800/182977012-d17eeae9-9b9d-4693-a5d0-e9d76897efab.png)
+# Note if you build project yourself download these
+- Costura.Fody 5.7.0
+- Jurassic 3.2.6
+- Leaf.XNet 5.2.10
