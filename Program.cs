@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -115,15 +115,25 @@ namespace Proxies
             }
             for (int o = 0; o < ProxiesUrls.Count; o++)
             {
-                Proxies.Add(Regex.Replace(new WebClient().DownloadString(ProxiesUrls[o]), @"[^0-9\s.:]", ""));
+                try
+                {
+                    Proxies.Add(Regex.Replace(new WebClient().DownloadString(ProxiesUrls[o]), @"[^0-9\s.:]", ""));
+
+                }
+                catch { }
             }
             WriteLine($"[+] All URL's was scraped.", ConsoleColor.Green);
         }
         private static void ProxyScrapeCom()
         {
-            string data = Regex.Replace(new WebClient().DownloadString("https://api.proxyscrape.com/proxytable.php").ToLower().Replace("\":1", "\n").Replace("\":2", "\n").Replace("\":3", "\n").Replace("\"http\":", "").Replace("\"https\":", "").Replace("\"socks4\":", "").Replace("\"socks5\":", ""), @"[^0-9\s.:]", "");
-            Proxies.Add(data);
-            WriteLine($"[+] CheckerProxy.Net, {data.Split('\n').Count()} proxies scraped.", ConsoleColor.Green);
+            try
+            {
+
+                string data = Regex.Replace(new WebClient().DownloadString("https://api.proxyscrape.com/proxytable.php").ToLower().Replace("\":1", "\n").Replace("\":2", "\n").Replace("\":3", "\n").Replace("\"http\":", "").Replace("\"https\":", "").Replace("\"socks4\":", "").Replace("\"socks5\":", ""), @"[^0-9\s.:]", "");
+                Proxies.Add(data);
+                WriteLine($"[+] CheckerProxy.Net, {data.Split('\n').Count()} proxies scraped.", ConsoleColor.Green);
+            }
+            catch { }
         }
         private static void Proxs()
         {
@@ -131,7 +141,7 @@ namespace Proxies
             Proxies.Add(data);
             WriteLine($"[+] CheckerProxy.Net, {data.Split('\n').Count()} proxies scraped.", ConsoleColor.Green);
         }
-        
+
         private static void HideMyName()
         {
             string url = "https://hidemy.name/en/proxy-list/";
@@ -283,7 +293,7 @@ namespace Proxies
                 t.Join();
 
             ParseURLs(@"urls.txt");
-            
+
             if (File.Exists("proxies.txt"))
             {
                 WriteLine("[!] proxies.txt is already exists, deleting...", ConsoleColor.Red);
